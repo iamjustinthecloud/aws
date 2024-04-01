@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "justinthecloud-serverless"
+version = "0.1.0"
+description = ""
+authors = ["Justin Allen <justinallen.ch@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+constructs = "^10.0"
+aws-cdk-lib = "^2.134.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2"
+
+[tool.poetry.group.dev.dependencies]
+coverage = "^7.4.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
