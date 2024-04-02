@@ -1,9 +1,8 @@
 # Test the serverless stack
 
-import pytest
 from aws_cdk import App
 from aws_cdk.assertions import Template
-from serverless_stack import ServerlessStack
+from serverless_app.serverless_stack import ServerlessStack
 
 
 def test_ses_email_identities():

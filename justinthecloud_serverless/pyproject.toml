@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "justinthecloud-serverless"
+name = "serverless_app"
 version = "0.1.0"
 description = ""
 authors = ["Justin Allen <justinallen.ch@gmail.com>"]

@@ -8,12 +8,17 @@ venv/
 
 # Editor directories
 .idea/
+../.idea/
+
 
 # Build output
+serverless_app/cdk.out/
 cdk.out/
-
 # Coverage reports
 .coverage
+../.coverage
+
+
 htmlcov/
 coverage.xml
 # OS generated files
