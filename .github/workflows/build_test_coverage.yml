@@ -35,6 +35,11 @@ jobs:
           poetry run coverage xml
         working-directory: ./justinthecloud_serverless
 
+      - name: List contents where coverage.xml should be
+        run: |
+          pwd
+          ls -la
+
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
