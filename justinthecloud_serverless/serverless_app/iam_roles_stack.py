@@ -6,27 +6,26 @@ from constructs import Construct
 class LambdaRoleStack(Stack):
     def __init__(self, scope: Construct, id: str, policy_name=str, **kwargs):
         super().__init__(scope, id, **kwargs)
-        cloudwatch_policy_document = iam.PolicyDocument(
-            statements=[
-                iam.PolicyStatement(
-                    actions=["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
-                    resources=["arn:aws:logs:*:*:*"]
-                )
-            ]
+
+        lambda_role = iam.Role(
+            self,
+            "LambdaRole",
+            assumed_by=iam.ServicePrincipal("lambda.amazonaws.com")
         )
-        sns_and_ses_policy_document = iam.PolicyDocument(
-            statements=[
-                iam.PolicyStatement(
+
+        logs_policy = iam.PolicyStatement(
+                actions=["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
+                resources=["*"]
+            )
+        lambda_role.add_to_policy(statement=logs_policy)
+
+        ses_sns_policy = iam.PolicyStatement(
                     actions=["ses:*", "sns:*", "states:*"],
                     resources=["*"]
                 )
-            ]
-        )
+        lambda_role.add_to_policy(statement=ses_sns_policy)
 
-        iam.Role(
-            self,
-            "LambdaRole1",
-            assumed_by=iam.ServicePrincipal("lambda.amazonaws.com"),
-            inline_policies={"CloudwatchLogsPolicy": cloudwatch_policy_document,
-                             "SnsSesPolicy": sns_and_ses_policy_document}
-        )
+
+
+
+
