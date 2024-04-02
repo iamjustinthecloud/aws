@@ -11,9 +11,7 @@ jobs:
   tests:
     name: Run tests and upload coverage to SonarCloud
     runs-on: ubuntu-latest
-    defaults:
-        run:
-            working-directory: ./justinthecloud_serverless
+
     steps:
       - uses: actions/checkout@v2
 
@@ -22,18 +20,20 @@ jobs:
         with:
           python-version: '3.12.2'
 
-      - name: Install dependencies
+      - name: Install Poetry
         run: |
           python -m pip install --upgrade pip
           pip install poetry
 
       - name: Install dependencies
         run:  poetry install
+        working-directory: ./justinthecloud_serverless
 
       - name: Run tests with coverage
         run: |
           poetry run coverage run -m pytest
           poetry run coverage xml
+        working-directory: ./justinthecloud_serverless
 
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
@@ -44,4 +44,4 @@ jobs:
           args: >
             -Dsonar.projectKey=iamjustinthecloud_aws
             -Dsonar.organization=iamjustinthecloud
-            -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.python.coverage.reportPaths=justinthecloud_serverless/coverage.xml
