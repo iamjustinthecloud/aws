@@ -11,6 +11,9 @@ jobs:
   tests:
     name: Run tests and upload coverage to SonarCloud
     runs-on: ubuntu-latest
+    defaults:
+        run:
+            working-directory: ./justinthecloud_serverless
     steps:
       - uses: actions/checkout@v2
 
